@@ -1,3 +1,4 @@
+# Based on https://src.fedoraproject.org/rpms/gamescope
 %global commit b3c3ac792908aa721991f4aa0a3a2d7c41f203c1
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global git_date 20240520T181756Z
@@ -36,7 +37,6 @@ BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  glm-devel
 BuildRequires:  google-benchmark-devel
-BuildRequires:  libeis-devel
 BuildRequires:  libXmu-devel
 BuildRequires:  libXcursor-devel
 BuildRequires:  pkgconfig(libdisplay-info)
@@ -62,7 +62,6 @@ BuildRequires:  pkgconfig(libavif)
 #BuildRequires:  (pkgconfig(libliftoff) >= 0.4.1 with pkgconfig(libliftoff) < 0.5)
 BuildRequires:  pkgconfig(libcap)
 BuildRequires:  pkgconfig(hwdata)
-BuildRequires:  pkgconfig(libdecor-0)
 BuildRequires:  spirv-headers-devel
 # Enforce the the minimum EVR to contain fixes for all of:
 # CVE-2021-28021 CVE-2021-42715 CVE-2021-42716 CVE-2022-28041 CVE-2023-43898
@@ -78,10 +77,14 @@ BuildRequires:  stb_image_write-static
 #BuildRequires:  vkroots-devel
 BuildRequires:  /usr/bin/glslangValidator
 
-#vkroots deps
+# Deps that aren't present in fedora gamescope currently
+BuildRequires:  libeis-devel
+BuildRequires:  pkgconfig(libdecor-0)
+
+# vkroots deps
 BuildRequires:  vulkan-headers
 
-#wlroots deps
+# wlroots deps
 BuildRequires:  pkgconfig(egl)
 BuildRequires:  pkgconfig(gbm) >= 17.1.0
 BuildRequires:  pkgconfig(glesv2)
@@ -142,14 +145,14 @@ export PKG_CONFIG_PATH=pkgconfig
 %{_datadir}/vulkan/implicit_layer.d/VkLayer_FROG_gamescope_wsi.*.json
 
 %ghost
-/usr/include/vkroots.h
-/usr/include/wlr/*
-/usr/lib64/libwlroots.a
-/usr/lib64/pkgconfig/vkroots.pc
-/usr/lib64/pkgconfig/wlroots.pc
-/usr/include/libliftoff.h
-/usr/lib64/libliftoff.a
-/usr/lib64/pkgconfig/libliftoff.pc
+%{_includedir}/vkroots.h
+%{_libdir}/pkgconfig/vkroots.pc
+%{_includedir}/wlr/*
+%{_libdir}/libwlroots.a
+%{_libdir}/pkgconfig/wlroots.pc
+%{_includedir}/libliftoff.h
+%{_libdir}/libliftoff.a
+%{_libdir}/pkgconfig/libliftoff.pc
 
 %changelog
 %autochangelog
