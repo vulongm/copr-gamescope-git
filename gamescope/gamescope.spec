@@ -4,7 +4,7 @@
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global git_date 20240520T181756Z
 %global tag 3.14.16
-%global libliftoff_minver 0.4.1
+%global libliftoff_minver 0.5.0
 %global reshade_commit 4245743a8c41abbe3dc73980c1810fe449359bf1
 %global reshade_shortcommit %(c=%{reshade_commit}; echo ${c:0:7})
 
@@ -51,7 +51,7 @@ BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(libpipewire-0.3)
 BuildRequires:  pkgconfig(libavif)
 BuildRequires:  (pkgconfig(wlroots) >= 0.18.0 with pkgconfig(wlroots) < 0.19)
-BuildRequires:  (pkgconfig(libliftoff) >= 0.4.1 with pkgconfig(libliftoff) < 0.5)
+BuildRequires:  (pkgconfig(libliftoff) >= 0.5.0 with pkgconfig(libliftoff) < 0.6)
 BuildRequires:  pkgconfig(libcap)
 BuildRequires:  pkgconfig(hwdata)
 BuildRequires:  spirv-headers-devel
@@ -72,7 +72,7 @@ BuildRequires:  /usr/bin/glslangValidator
 # Deps not present in fedora gamescope currently
 BuildRequires:  pkgconfig(openvr)
 Recommends:     openvr
-BuildRequires:  pkgconfig(libeis-1.0)
+BuildRequires:  libeis-devel
 BuildRequires:  pkgconfig(libdecor-0)
 
 # libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
@@ -100,7 +100,7 @@ rm -rf src/reshade && mv reshade-%{reshade_commit} src/reshade
 
 %build
 export PKG_CONFIG_PATH=pkgconfig
-%meson -Dpipewire=enabled -Dforce_fallback_for=libliftoff
+%meson -Dpipewire=enabled -Dforce_fallback_for=[]
 %meson_build
 
 %install
