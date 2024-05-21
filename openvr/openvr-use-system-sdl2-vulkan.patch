@@ -68,5 +68,3 @@ index 545ff1a..dacb2ba 100644
 +    set(VULKAN_INCLUDE_DIR ${THIRDPARTY_DIR}/vulkan-1.0.49.0/include)
 +  endif()
  endif()
- 
- 
