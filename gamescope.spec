@@ -130,7 +130,7 @@ rm -rf subprojects/libliftoff && mv libliftoff-%{libliftoff_commit} subprojects/
 
 %build
 export PKG_CONFIG_PATH=pkgconfig
-%meson -Dpipewire=enabled -Denable_openvr_support=false -Dforce_fallback_for=[]
+%meson -Dpipewire=enabled -Dforce_fallback_for=[]
 %meson_build
 
 %install
