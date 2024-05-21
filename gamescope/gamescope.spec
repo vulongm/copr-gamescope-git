@@ -79,7 +79,8 @@ BuildRequires:  /usr/bin/glslangValidator
 
 # Deps that aren't present in fedora gamescope currently
 BuildRequires:  pkgconfig(openvr)
-BuildRequires:  libeis-devel
+Recommends:     openvr
+BuildRequires:  pkgconfig(libeis-1.0)
 BuildRequires:  pkgconfig(libdecor-0)
 
 # vkroots deps
