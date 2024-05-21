@@ -78,6 +78,7 @@ BuildRequires:  stb_image_write-static
 BuildRequires:  /usr/bin/glslangValidator
 
 # Deps that aren't present in fedora gamescope currently
+BuildRequires:  pkgconfig(openvr)
 BuildRequires:  libeis-devel
 BuildRequires:  pkgconfig(libdecor-0)
 
