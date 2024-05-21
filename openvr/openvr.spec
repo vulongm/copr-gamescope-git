@@ -1,4 +1,5 @@
 # Based on https://src.fedoraproject.org/rpms/openvr
+
 # Samples aren't supported on i686
 %ifarch i686
 %bcond_with samples
