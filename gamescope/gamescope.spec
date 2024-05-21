@@ -75,14 +75,11 @@ BuildRequires:  stb_image_write-static
 BuildRequires:  vkroots-devel
 BuildRequires:  /usr/bin/glslangValidator
 
-# Deps that aren't present in fedora gamescope currently
+# Deps not present in fedora gamescope currently
 BuildRequires:  pkgconfig(openvr)
 Recommends:     openvr
 BuildRequires:  libeis-devel
 BuildRequires:  pkgconfig(libdecor-0)
-
-# vkroots deps
-BuildRequires:  vulkan-headers
 
 # wlroots deps
 BuildRequires:  pkgconfig(egl)
@@ -121,7 +118,7 @@ sed -i 's^../thirdparty/SPIRV-Headers/include/spirv/^/usr/include/spirv/^' src/m
 # Push in reshade from sources instead of submodule
 rm -rf src/reshade && mv reshade-%{reshade_commit} src/reshade
 
-# Use wlroots and libliftoff from sources instead of submodule
+# Push in wlroots and libliftoff from sources instead of submodule
 rm -rf subprojects/wlroots && mv wlroots-%{wlroots_commit} subprojects/wlroots
 rm -rf subprojects/libliftoff && mv libliftoff-%{libliftoff_commit} subprojects/libliftoff
 
