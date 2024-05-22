@@ -1,9 +1,9 @@
 # Based on https://src.fedoraproject.org/rpms/libliftoff
 
 %global debug_package %{nil}
-%global commit c5f0ff73e452ab6297ad03d27c67949a0460abd9
+%global commit 8d45eeae7f17459d4ca85680832df0a875b5f64b
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global git_date 20240516
+%global git_date 20240521
 
 Name:           libliftoff
 Version:        0.5.0^%{git_date}.git%{shortcommit}
