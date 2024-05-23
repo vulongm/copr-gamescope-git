@@ -16,7 +16,7 @@ jobs:
         id: get-commit
         run: |
           latest_commit=$(curl -s https://api.github.com/repos/ValveSoftware/gamescope/commits/master | jq -r '.sha')
-          git_date=$(curl -s https://api.github.com/repos/ValveSoftware/gamescope/commits/master | jq -r '.commit.committer.date' | sed 's/[-:]//g')
+          git_date=$(curl -s https://api.github.com/repos/ValveSoftware/gamescope/commits/master | jq -r '.commit.committer.date' | cut -d "T" -f1 | sed 's/-//g')
           latest_tag=$(curl -s https://api.github.com/repos/ValveSoftware/gamescope/tags | jq -r '.[0].name')
           echo "latest-commit=$latest_commit" >> $GITHUB_OUTPUT
           echo "git-date=$git_date" >> $GITHUB_OUTPUT
@@ -50,5 +50,5 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add gamescope/gamescope.spec
-          git commit -m "[gamescope] Update commit to ${{ steps.get-commit.outputs.latest-commit }}"
+          git commit -m "Update gamescope commit to ${{ steps.get-commit.outputs.latest-commit }}"
           git push

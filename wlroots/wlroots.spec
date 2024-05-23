@@ -4,12 +4,13 @@
 %global commit a5c9826e6d7d8b504b07d1c02425e6f62b020791
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global git_date 20240320
+%global tag 0.18.0
 # Version of the .so library
 %global abi_ver 13
 
 Name:           wlroots
-Version:        0.18.0^%{git_date}.git%{shortcommit}
-Release:        %autorelease
+Version:        %{tag}
+Release:        %autorelease -s %{git_date}git%{shortcommit}
 Summary:        A modular Wayland compositor library
 
 # Source files/overall project licensed as MIT, but
@@ -42,7 +43,7 @@ BuildRequires:  gnupg2
 BuildRequires:  meson >= 0.59.0
 
 BuildRequires:  (pkgconfig(libdisplay-info) >= 0.1.1 with pkgconfig(libdisplay-info) < 0.2)
-BuildRequires:  (pkgconfig(libliftoff) >= 0.5.0 with pkgconfig(libliftoff) < 0.6.0)
+BuildRequires:  (pkgconfig(libliftoff) >= 0.4.0 with pkgconfig(libliftoff) < 0.5.0)
 BuildRequires:  pkgconfig(egl)
 BuildRequires:  pkgconfig(gbm) >= 17.1.0
 BuildRequires:  pkgconfig(glesv2)

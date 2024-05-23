@@ -13,8 +13,8 @@
 %global libliftoff_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
 
 Name:           gamescope
-Version:        %{tag}^%{git_date}.git%{shortcommit}
-Release:        %autorelease
+Version:        %{tag}
+Release:        %autorelease -s %{git_date}git%{shortcommit}
 Summary:        Micro-compositor for video games on Wayland
 
 License:        BSD
