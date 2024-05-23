@@ -81,6 +81,22 @@ Recommends:     openvr
 BuildRequires:  libeis-devel
 BuildRequires:  libdecor-devel
 
+# wlroots deps
+BuildRequires:  pkgconfig(egl)
+BuildRequires:  pkgconfig(gbm) >= 17.1.0
+BuildRequires:  pkgconfig(glesv2)
+BuildRequires:  pkgconfig(libinput) >= 1.21.0
+BuildRequires:  pkgconfig(libseat)
+BuildRequires:  pkgconfig(libudev)
+BuildRequires:  pkgconfig(pixman-1) >= 0.42.0
+BuildRequires:  pkgconfig(wayland-client)
+BuildRequires:  pkgconfig(x11-xcb)
+BuildRequires:  pkgconfig(xcb)
+BuildRequires:  pkgconfig(xcb-errors)
+BuildRequires:  pkgconfig(xcb-icccm)
+BuildRequires:  pkgconfig(xcb-renderutil)
+BuildRequires:  pkgconfig(xwayland)
+
 # libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
 #Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
 Requires:       xorg-x11-server-Xwayland
