@@ -9,7 +9,7 @@
 %global reshade_shortcommit %(c=%{reshade_commit}; echo ${c:0:7})
 %global wlroots_commit a5c9826e6d7d8b504b07d1c02425e6f62b020791
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
-%global libliftoff_commit 29a06add8ef184f85e37ff8abdc34fbaa2f4ee1e
+%global libliftoff_commit 8d45eeae7f17459d4ca85680832df0a875b5f64b
 %global libliftoff_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
 
 Name:           gamescope
