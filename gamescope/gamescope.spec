@@ -7,6 +7,10 @@
 %global libliftoff_minver 0.5.0
 %global reshade_commit 4245743a8c41abbe3dc73980c1810fe449359bf1
 %global reshade_shortcommit %(c=%{reshade_commit}; echo ${c:0:7})
+%global wlroots_commit a5c9826e6d7d8b504b07d1c02425e6f62b020791
+%global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
+%global libliftoff_commit 29a06add8ef184f85e37ff8abdc34fbaa2f4ee1e
+%global libliftoff_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
 
 Name:           gamescope
 Version:        %{tag}
@@ -50,8 +54,8 @@ BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(libpipewire-0.3)
 BuildRequires:  pkgconfig(libavif)
-BuildRequires:  (pkgconfig(wlroots) >= 0.18.0 with pkgconfig(wlroots) < 0.19)
-BuildRequires:  (pkgconfig(libliftoff) >= 0.5.0 with pkgconfig(libliftoff) < 0.6)
+#BuildRequires:  (pkgconfig(wlroots) >= 0.18.0 with pkgconfig(wlroots) < 0.19)
+#BuildRequires:  (pkgconfig(libliftoff) >= 0.5.0 with pkgconfig(libliftoff) < 0.6)
 BuildRequires:  pkgconfig(libcap)
 BuildRequires:  pkgconfig(hwdata)
 BuildRequires:  spirv-headers-devel
@@ -76,7 +80,7 @@ BuildRequires:  libeis-devel
 BuildRequires:  libdecor-devel
 
 # libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
-Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
+#Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
 Requires:       xorg-x11-server-Xwayland
 Recommends:     mesa-dri-drivers
 Recommends:     mesa-vulkan-drivers
@@ -85,7 +89,7 @@ Recommends:     mesa-vulkan-drivers
 %{name} is the micro-compositor optimized for running video games on Wayland.
 
 %prep
-%autosetup -p1 -a2 -N -n %{name}-%{commit}
+%setup -a2 -a3 -a4 -q -n %{name}-%{commit}
 # Install stub pkgconfig file
 mkdir -p pkgconfig
 cp %{SOURCE1} pkgconfig/stb.pc
@@ -95,6 +99,10 @@ sed -i 's^../thirdparty/SPIRV-Headers/include/spirv/^/usr/include/spirv/^' src/m
 
 # Push in reshade from sources instead of submodule
 rm -rf src/reshade && mv reshade-%{reshade_commit} src/reshade
+
+# Use wlroots and libliftoff from sources instead of submodule
+rm -rf subprojects/wlroots && mv wlroots-%{wlroots_commit} subprojects/wlroots
+rm -rf subprojects/libliftoff && mv libliftoff-%{libliftoff_commit} subprojects/libliftoff
 
 %autopatch -p1
 
@@ -113,6 +121,14 @@ export PKG_CONFIG_PATH=pkgconfig
 %{_bindir}/gamescopestream
 %{_libdir}/libVkLayer_FROG_gamescope_wsi_*.so
 %{_datadir}/vulkan/implicit_layer.d/VkLayer_FROG_gamescope_wsi.*.json
+
+%ghost
+%{_includedir}/wlr/*
+%{_libdir}/libwlroots.a
+%{_libdir}/pkgconfig/wlroots.pc
+%{_includedir}/libliftoff.h
+%{_libdir}/libliftoff.a
+%{_libdir}/pkgconfig/libliftoff.pc
 
 %changelog
 %autochangelog
