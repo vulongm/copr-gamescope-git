@@ -11,7 +11,7 @@
 
 Name:           gamescope
 Version:        %{tag}.90
-Release:        %{ver_count}.%{git_date}git%{shortcommit}
+Release:        %{ver_count}.%{git_date}git%{shortcommit}%{?dist}
 Summary:        Micro-compositor for video games on Wayland
 
 License:        BSD

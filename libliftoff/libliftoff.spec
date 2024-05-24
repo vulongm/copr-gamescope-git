@@ -9,7 +9,7 @@
 
 Name:           libliftoff
 Version:        %{tag}
-Release:        %{ver_count}.%{git_date}git%{shortcommit}
+Release:        %{ver_count}.%{git_date}git%{shortcommit}%{?dist}
 Summary:        Lightweight KMS plane library
 
 License:        MIT
