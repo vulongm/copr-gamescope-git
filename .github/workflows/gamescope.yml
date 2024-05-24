@@ -41,7 +41,7 @@ jobs:
               new_ver_count=$((${{ steps.get-commit.outputs.latest-ver-count }} + 1))
               echo "ver-count=$new_ver_count" >> $GITHUB_OUTPUT
             else
-              echo "ver-count='0'" >> $GITHUB_OUTPUT
+              echo "ver-count=0" >> $GITHUB_OUTPUT
             fi
           else
             echo "new-commit='false'" >> $GITHUB_OUTPUT
