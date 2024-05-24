@@ -87,6 +87,7 @@ Recommends:     mesa-vulkan-drivers
 
 %prep
 %autosetup -p1 -a2 -N -n %{name}-%{commit}
+
 # Install stub pkgconfig file
 mkdir -p pkgconfig
 cp %{SOURCE1} pkgconfig/stb.pc
