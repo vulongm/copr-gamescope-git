@@ -1,16 +1,17 @@
-# Based on https://src.fedoraproject.org/rpms/libliftoff
+# Based on https://src.fedoraproject.org/rpms/wlroots
 
 %global debug_package %{nil}
 %global commit a5c9826e6d7d8b504b07d1c02425e6f62b020791
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global git_date 20240320
 %global tag 0.18.0
+%global ver_count 1
 # Version of the .so library
 %global abi_ver 13
 
 Name:           wlroots
 Version:        %{tag}
-Release:        %autorelease -s %{git_date}git%{shortcommit}
+Release:        %{ver_count}.%{git_date}git%{shortcommit}
 Summary:        A modular Wayland compositor library
 
 # Source files/overall project licensed as MIT, but

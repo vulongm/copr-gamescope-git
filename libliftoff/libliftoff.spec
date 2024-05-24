@@ -5,10 +5,11 @@
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global git_date 20240521
 %global tag 0.5.0
+%global ver_count 1
 
 Name:           libliftoff
 Version:        %{tag}
-Release:        %autorelease -s %{git_date}git%{shortcommit}
+Release:        %{ver_count}.%{git_date}git%{shortcommit}
 Summary:        Lightweight KMS plane library
 
 License:        MIT
