@@ -116,7 +116,6 @@ sed -i 's^../thirdparty/SPIRV-Headers/include/spirv/^/usr/include/spirv/^' src/m
 # Push in reshade from sources instead of submodule
 rm -rf src/reshade && mv reshade-%{reshade_commit} src/reshade
 
-
 # Use wlroots from sources instead of submodule
 rm -rf subprojects/wlroots && mv wlroots-%{wlroots_commit} subprojects/wlroots
 
