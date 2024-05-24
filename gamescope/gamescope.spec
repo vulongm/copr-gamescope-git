@@ -74,7 +74,6 @@ BuildRequires:  /usr/bin/glslangValidator
 BuildRequires:  pkgconfig(openvr)
 BuildRequires:  libeis-devel
 BuildRequires:  libdecor-devel
-BuildRequires:  pkgconfig(pixman-1) >= 0.42.0
 
 # libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
 Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
