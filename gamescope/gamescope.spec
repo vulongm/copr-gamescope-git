@@ -1,10 +1,10 @@
 # Based on https://src.fedoraproject.org/rpms/gamescope
 
-%global commit c5a5ba00b655caa1c10656dfe3ae09e281ec0544
+%global commit 3a8d1de86aa63f1f5355219f548755908f0528db
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global git_date 20240602
 %global tag 3.14.18
-%global ver_count 1
+%global ver_count 2
 %global libliftoff_minver 0.5.0
 %global reshade_commit 4245743a8c41abbe3dc73980c1810fe449359bf1
 %global reshade_shortcommit %(c=%{reshade_commit}; echo ${c:0:7})
