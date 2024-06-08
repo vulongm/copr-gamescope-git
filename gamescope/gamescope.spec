@@ -101,7 +101,7 @@ Recommends:     mesa-vulkan-drivers
 %{name} is the micro-compositor optimized for running video games on Wayland.
 
 %prep
-%setup -a2 -a3 -q -n %{name}-%{commit}
+%autosetup -p1 -a2 -N -n %{name}-%{commit}
 
 # Install stub pkgconfig file
 mkdir -p pkgconfig
