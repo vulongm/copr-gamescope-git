@@ -103,10 +103,9 @@ rm -rf src/reshade && mv reshade-%{reshade_commit} src/reshade
 export PKG_CONFIG_PATH=pkgconfig
 %meson -Dpipewire=enabled -Dforce_fallback_for=[]
 %meson_build
-sed -i 's/-Wl,--as-needed/-Wl,--as-needed -lpixman-1/' build.ninja
 
 %install
-%meson_install --skip-subprojects
+%meson_install
 
 %files
 %license LICENSE

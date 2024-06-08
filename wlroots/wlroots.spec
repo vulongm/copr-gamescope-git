@@ -102,6 +102,9 @@ MESON_OPTIONS=(
 %{meson_install}
 install -pm0644 -D '%{SOURCE1}' '%{buildroot}/%{_pkgdocdir}/examples/meson.build'
 
+# Modify .pc file to include pixman in libs
+sed -i 's/^\(Libs:.*\)/\1 -lpixman-1/' %{buildroot}/%{_libdir}/pkgconfig/wlroots.pc
+
 %check
 %{meson_test}
 
