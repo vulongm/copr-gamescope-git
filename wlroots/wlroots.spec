@@ -38,6 +38,12 @@ Source0:        %{url}/archive/%{commit}/%{name}-%{shortcommit}.tar.gz
 # - only has targets for examples known to compile well (cf. "examples) global)
 Source1:        examples.meson.build
 
+# Upstream patches
+
+# Fedora patches
+# Following patch is required for phoc.
+Patch:          Revert-layer-shell-error-on-0-dimension-without-anch.patch
+
 BuildRequires:  gcc
 BuildRequires:  glslang
 BuildRequires:  gnupg2
