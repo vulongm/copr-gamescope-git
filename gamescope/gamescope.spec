@@ -84,8 +84,8 @@ Recommends:     mesa-vulkan-drivers
 
 %prep
 git clone %{URL}
-git checkout %{commit}
 cd gamescope
+git checkout %{commit}
 git submodule update --init --recursive
 
 # Install stub pkgconfig file
