@@ -10,8 +10,8 @@
 %global abi_ver 13
 
 Name:           wlroots
-Version:        %{tag}
-Release:        %{ver_count}.%{git_date}git%{shortcommit}%{?dist}
+Version:        %{tag}.90
+Release:        %{git_date}.%{ver_count}.%{shortcommit}%{?dist}
 Summary:        A modular Wayland compositor library
 
 # Source files/overall project licensed as MIT, but

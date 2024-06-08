@@ -9,7 +9,7 @@
 
 Name:           vkroots
 Version:        %{tag}
-Release:        %{ver_count}.%{git_date}git%{shortcommit}%{?dist}
+Release:        %{git_date}.%{ver_count}.%{shortcommit}%{?dist}
 Summary:        A stupid simple method of making Vulkan layers, at home
 
 License:        LGPL-2.1-or-later AND (Apache-2.0 or MIT)
