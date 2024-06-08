@@ -8,7 +8,7 @@
 %global libliftoff_minver 0.5.0
 
 Name:           gamescope
-Version:        %{tag}.90
+Version:        %{tag}
 Release:        %{git_date}.%{ver_count}.%{shortcommit}%{?dist}
 Summary:        Micro-compositor for video games on Wayland
 
@@ -16,8 +16,6 @@ License:        BSD
 URL:            https://github.com/ValveSoftware/gamescope
 # Create stb.pc to satisfy dependency('stb')
 Source0:        stb.pc
-
-Patch01:        0001-cstdint.patch
 
 BuildRequires:  meson >= 0.54.0
 BuildRequires:  ninja-build
