@@ -20,7 +20,6 @@ Source0:        %{url}/archive/%{commit}.tar.gz
 # Create stb.pc to satisfy dependency('stb')
 Source1:        stb.pc
 Source2:        https://github.com/Joshua-Ashton/reshade/archive/%{reshade_commit}/reshade-%{reshade_shortcommit}.tar.gz
-Source3:        https://github.com/Joshua-Ashton/wlroots/archive/%{wlroots_commit}/wlroots-%{wlroots_shortcommit}.tar.gz
 
 Patch01:        0001-cstdint.patch
 
