@@ -95,6 +95,8 @@ MESON_OPTIONS=(
     -Dexamples=false
 )
 
+export LDFLAGS="$LDFLAGS -lpixman-1"
+
 %{meson} "${MESON_OPTIONS[@]}"
 %{meson_build}
 
