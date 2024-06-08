@@ -12,8 +12,8 @@
 %global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
 
 Name:           gamescope
-Version:        %{tag}.90
-Release:        %{ver_count}.%{git_date}git%{shortcommit}%{?dist}
+Version:        %{tag}
+Release:        %{git_date}.%{ver_count}.%{shortcommit}%{?dist}
 Summary:        Micro-compositor for video games on Wayland
 
 License:        BSD
