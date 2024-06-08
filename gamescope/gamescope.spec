@@ -6,8 +6,6 @@
 %global tag 3.14.18
 %global ver_count 1
 %global libliftoff_minver 0.5.0
-%global reshade_commit 4245743a8c41abbe3dc73980c1810fe449359bf1
-%global reshade_shortcommit %(c=%{reshade_commit}; echo ${c:0:7})
 
 Name:           gamescope
 Version:        %{tag}.90
@@ -16,10 +14,8 @@ Summary:        Micro-compositor for video games on Wayland
 
 License:        BSD
 URL:            https://github.com/ValveSoftware/gamescope
-Source0:        %{url}/archive/%{commit}.tar.gz
 # Create stb.pc to satisfy dependency('stb')
-Source1:        stb.pc
-Source2:        https://github.com/Joshua-Ashton/reshade/archive/%{reshade_commit}/reshade-%{reshade_shortcommit}.tar.gz
+Source0:        stb.pc
 
 Patch01:        0001-cstdint.patch
 
@@ -75,7 +71,7 @@ BuildRequires:  pkgconfig(openvr)
 BuildRequires:  libeis-devel
 BuildRequires:  libdecor-devel
 BuildRequires:  pixman-devel
-BuildRequires:  pkgconfig(pixman-1)
+BuildRequires:  git
 
 # libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
 Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
@@ -87,7 +83,10 @@ Recommends:     mesa-vulkan-drivers
 %{name} is the micro-compositor optimized for running video games on Wayland.
 
 %prep
-%autosetup -p1 -a2 -N -n %{name}-%{commit}
+git clone %{URL}
+git checkout %{commit}
+cd gamescope
+git submodule update --init --recursive
 
 # Install stub pkgconfig file
 mkdir -p pkgconfig
@@ -96,18 +95,17 @@ cp %{SOURCE1} pkgconfig/stb.pc
 # Replace spirv-headers include with the system directory
 sed -i 's^../thirdparty/SPIRV-Headers/include/spirv/^/usr/include/spirv/^' src/meson.build
 
-# Push in reshade from sources instead of submodule
-rm -rf src/reshade && mv reshade-%{reshade_commit} src/reshade
-
 %autopatch -p1
 
 %build
+cd gamescope
 export PKG_CONFIG_PATH=pkgconfig
 %meson -Dpipewire=enabled -Dforce_fallback_for=[]
 %meson_build
 
 %install
-%meson_install
+cd gamescope
+%meson_install --skip-subprojects
 
 %files
 %license LICENSE
