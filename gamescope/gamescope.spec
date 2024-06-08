@@ -6,6 +6,10 @@
 %global tag 3.14.18
 %global ver_count 1
 %global libliftoff_minver 0.5.0
+%global reshade_commit 4245743a8c41abbe3dc73980c1810fe449359bf1
+%global reshade_shortcommit %(c=%{reshade_commit}; echo ${c:0:7})
+%global wlroots_commit a5c9826e6d7d8b504b07d1c02425e6f62b020791
+%global wlroots_shortcommit %(c=%{wlroots_commit}; echo ${c:0:7})
 
 Name:           gamescope
 Version:        %{tag}
@@ -14,8 +18,13 @@ Summary:        Micro-compositor for video games on Wayland
 
 License:        BSD
 URL:            https://github.com/ValveSoftware/gamescope
+Source0:        %{url}/archive/%{commit}.tar.gz
 # Create stb.pc to satisfy dependency('stb')
-Source0:        stb.pc
+Source1:        stb.pc
+Source2:        https://github.com/Joshua-Ashton/reshade/archive/%{reshade_commit}/reshade-%{reshade_shortcommit}.tar.gz
+Source3:        https://github.com/Joshua-Ashton/wlroots/archive/%{wlroots_commit}/wlroots-%{wlroots_shortcommit}.tar.gz
+
+Patch01:        0001-cstdint.patch
 
 BuildRequires:  meson >= 0.54.0
 BuildRequires:  ninja-build
@@ -68,8 +77,22 @@ BuildRequires:  /usr/bin/glslangValidator
 BuildRequires:  pkgconfig(openvr)
 BuildRequires:  libeis-devel
 BuildRequires:  libdecor-devel
-BuildRequires:  pixman-devel
-BuildRequires:  git
+
+# wlroots deps
+BuildRequires:  pkgconfig(egl)
+BuildRequires:  pkgconfig(gbm) >= 17.1.0
+BuildRequires:  pkgconfig(glesv2)
+BuildRequires:  pkgconfig(libinput) >= 1.21.0
+BuildRequires:  pkgconfig(libseat)
+BuildRequires:  pkgconfig(libudev)
+BuildRequires:  pkgconfig(pixman-1) >= 0.42.0
+BuildRequires:  pkgconfig(wayland-client)
+BuildRequires:  pkgconfig(x11-xcb)
+BuildRequires:  pkgconfig(xcb)
+BuildRequires:  pkgconfig(xcb-errors)
+BuildRequires:  pkgconfig(xcb-icccm)
+BuildRequires:  pkgconfig(xcb-renderutil)
+BuildRequires:  pkgconfig(xwayland)
 
 # libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
 Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
@@ -81,28 +104,29 @@ Recommends:     mesa-vulkan-drivers
 %{name} is the micro-compositor optimized for running video games on Wayland.
 
 %prep
-git clone %{URL}
-cd gamescope
-git checkout %{commit}
-git submodule update --init --recursive
+%setup -a2 -a3 -q -n %{name}-%{commit}
 
 # Install stub pkgconfig file
 mkdir -p pkgconfig
-cp %{SOURCE0} pkgconfig/stb.pc
+cp %{SOURCE1} pkgconfig/stb.pc
 
 # Replace spirv-headers include with the system directory
 sed -i 's^../thirdparty/SPIRV-Headers/include/spirv/^/usr/include/spirv/^' src/meson.build
 
+# Push in reshade from sources instead of submodule
+rm -rf src/reshade && mv reshade-%{reshade_commit} src/reshade
+
+# Use wlroots from sources instead of submodule
+rm -rf subprojects/wlroots && mv wlroots-%{wlroots_commit} subprojects/wlroots
+
 %autopatch -p1
 
 %build
-cd gamescope
 export PKG_CONFIG_PATH=pkgconfig
 %meson -Dpipewire=enabled -Dforce_fallback_for=[]
 %meson_build
 
 %install
-cd gamescope
 %meson_install --skip-subprojects
 
 %files
