@@ -99,15 +99,9 @@ rm -rf src/reshade && mv reshade-%{reshade_commit} src/reshade
 
 %autopatch -p1
 
-%if 0%{?fedora} == 39
-  %define avif_screenshots disabled
-%else
-  %define avif_screenshots enabled
-%endif
-
 %build
 export PKG_CONFIG_PATH=pkgconfig
-%meson -Dpipewire=enabled -Davif_screenshots=%{avif_screenshots} -Dforce_fallback_for=[]
+%meson -Dpipewire=enabled -Dforce_fallback_for=[]
 %meson_build
 
 %install
