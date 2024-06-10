@@ -1,3 +1,5 @@
+# Based on https://src.fedoraproject.org/rpms/libavif
+
 # Build with aom
 %bcond_without aom
 # Build SVT-AV1
