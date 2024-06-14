@@ -15,6 +15,9 @@ Summary:        Micro-compositor for video games on Wayland
 License:        BSD
 URL:            https://github.com/ValveSoftware/gamescope
 
+# Create stb.pc to satisfy dependency('stb')
+Source0:        stb.pc
+
 BuildRequires:  meson >= 0.54.0
 BuildRequires:  ninja-build
 BuildRequires:  cmake
@@ -78,7 +81,8 @@ git checkout %{commit}
 git submodule update --init --recursive
 
 # Install stub pkgconfig file
-mkdir -p pkgconfig
+mkdir -p pkgconfig	
+cp %{SOURCE1} pkgconfig/stb.pc
 
 # Replace spirv-headers include with the system directory
 sed -i 's^../thirdparty/SPIRV-Headers/include/spirv/^/usr/include/spirv/^' src/meson.build
