@@ -22,6 +22,8 @@ BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  glm-devel
 BuildRequires:  google-benchmark-devel
+BuildRequires:  libeis-devel
+BuildRequires:  libdecor-devel
 BuildRequires:  libXmu-devel
 BuildRequires:  libXcursor-devel
 BuildRequires:  pkgconfig(libdisplay-info)
@@ -43,8 +45,6 @@ BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(libpipewire-0.3)
 BuildRequires:  pkgconfig(libavif)
-BuildRequires:  (pkgconfig(wlroots) >= 0.18.0 with pkgconfig(wlroots) < 0.19)
-BuildRequires:  (pkgconfig(libliftoff) >= 0.5.0 with pkgconfig(libliftoff) < 0.6)
 BuildRequires:  pkgconfig(libcap)
 BuildRequires:  pkgconfig(hwdata)
 BuildRequires:  spirv-headers-devel
@@ -59,13 +59,9 @@ BuildRequires:  stb_image_resize-devel
 BuildRequires:  stb_image_resize-static
 BuildRequires:  stb_image_write-devel
 BuildRequires:  stb_image_write-static
-BuildRequires:  vkroots-devel
 BuildRequires:  /usr/bin/glslangValidator
 
 # Deps not present in fedora gamescope currently
-BuildRequires:  pkgconfig(openvr)
-BuildRequires:  libeis-devel
-BuildRequires:  libdecor-devel
 
 # libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
 Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
