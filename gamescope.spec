@@ -14,9 +14,6 @@ Summary:        Micro-compositor for video games on Wayland
 
 License:        BSD
 URL:            https://github.com/ValveSoftware/gamescope
-Source0:        %{url}/archive/%{commit}.tar.gz
-# Create stb.pc to satisfy dependency('stb')
-Source1:        stb.pc
 
 Patch01:        0001-cstdint.patch
 
