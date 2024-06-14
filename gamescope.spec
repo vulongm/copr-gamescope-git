@@ -82,7 +82,7 @@ git submodule update --init --recursive
 
 # Install stub pkgconfig file
 mkdir -p pkgconfig	
-cp %{SOURCE1} pkgconfig/stb.pc
+cp %{SOURCE0} pkgconfig/stb.pc
 
 # Replace spirv-headers include with the system directory
 sed -i 's^../thirdparty/SPIRV-Headers/include/spirv/^/usr/include/spirv/^' src/meson.build
