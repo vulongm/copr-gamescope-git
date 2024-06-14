@@ -30,6 +30,7 @@ BuildRequires:  libeis-devel
 BuildRequires:  libdecor-devel
 BuildRequires:  libXmu-devel
 BuildRequires:  libXcursor-devel
+BuildRequires:  pixman-devel
 BuildRequires:  pkgconfig(libdisplay-info)
 BuildRequires:  pkgconfig(x11)
 BuildRequires:  pkgconfig(xdamage)
