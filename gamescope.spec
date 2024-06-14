@@ -74,6 +74,7 @@ BuildRequires:  libeis-devel
 BuildRequires:  libdecor-devel
 BuildRequires:  pkgconfig(pixman-1)
 BuildRequires:  pkgconfig(libudev)
+BuildRequires:  pkgconfig(libseat)
 
 %description
 %{name} is the micro-compositor optimized for running video games on Wayland.
