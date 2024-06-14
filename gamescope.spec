@@ -5,9 +5,7 @@
 %global git_date 20240613
 %global tag 3.14.18
 %global ver_count 1
-%global libliftoff_minver 0.5.0
-%global reshade_commit 4245743a8c41abbe3dc73980c1810fe449359bf1
-%global reshade_shortcommit %(c=%{reshade_commit}; echo ${c:0:7})
+%global libliftoff_minver 0.4.1
 
 Name:           gamescope
 Version:        %{tag}
@@ -19,7 +17,6 @@ URL:            https://github.com/ValveSoftware/gamescope
 Source0:        %{url}/archive/%{commit}.tar.gz
 # Create stb.pc to satisfy dependency('stb')
 Source1:        stb.pc
-Source2:        https://github.com/Joshua-Ashton/reshade/archive/%{reshade_commit}/reshade-%{reshade_shortcommit}.tar.gz
 
 Patch01:        0001-cstdint.patch
 
@@ -85,27 +82,34 @@ Recommends:     mesa-vulkan-drivers
 %{name} is the micro-compositor optimized for running video games on Wayland.
 
 %prep
-%autosetup -p1 -a2 -N -n %{name}-%{commit}
+git clone %{URL}
+cd gamescope
+git checkout %{commit}
+git submodule update --init --recursive
 
 # Install stub pkgconfig file
 mkdir -p pkgconfig
-cp %{SOURCE1} pkgconfig/stb.pc
 
 # Replace spirv-headers include with the system directory
 sed -i 's^../thirdparty/SPIRV-Headers/include/spirv/^/usr/include/spirv/^' src/meson.build
 
-# Push in reshade from sources instead of submodule
-rm -rf src/reshade && mv reshade-%{reshade_commit} src/reshade
-
 %autopatch -p1
 
+%if 0%{?fedora} == 39
+  %define avif_screenshots disabled
+%else
+  %define avif_screenshots enabled
+%endif
+
 %build
+cd gamescope
 export PKG_CONFIG_PATH=pkgconfig
-%meson -Dpipewire=enabled -Dforce_fallback_for=[]
+%meson -Dpipewire=enabled -Davif_screenshots=%{avif_screenshots}
 %meson_build
 
 %install
-%meson_install
+cd gamescope
+%meson_install --skip-subprojects
 
 %files
 %license LICENSE
