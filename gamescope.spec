@@ -73,16 +73,11 @@ BuildRequires:  git
 BuildRequires:  libeis-devel
 BuildRequires:  libdecor-devel
 
-# wlroots deps
-BuildRequires:  pkgconfig(egl)
-BuildRequires:  pkgconfig(gbm) >= 17.1.0
-BuildRequires:  pkgconfig(glesv2)
+# submodule deps
 BuildRequires:  pkgconfig(libinput) >= 1.21.0
-BuildRequires:  (pkgconfig(libliftoff) >= 0.4.1 with pkgconfig(libliftoff) < 0.5)
 BuildRequires:  pkgconfig(libseat)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(pixman-1) >= 0.42.0
-BuildRequires:  pkgconfig(wayland-client)
 BuildRequires:  pkgconfig(x11-xcb)
 BuildRequires:  pkgconfig(xcb)
 BuildRequires:  pkgconfig(xcb-errors)
@@ -125,8 +120,8 @@ cd gamescope
 %meson_install --skip-subprojects
 
 %files
-%license LICENSE
-%doc README.md
+%license gamescope/LICENSE
+%doc gamescope/README.md
 %caps(cap_sys_nice=eip) %{_bindir}/gamescope
 %{_bindir}/gamescopestream
 %{_bindir}/gamescopectl
