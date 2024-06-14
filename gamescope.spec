@@ -25,12 +25,8 @@ BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  glm-devel
 BuildRequires:  google-benchmark-devel
-BuildRequires:  git
-BuildRequires:  libeis-devel
-BuildRequires:  libdecor-devel
 BuildRequires:  libXmu-devel
 BuildRequires:  libXcursor-devel
-BuildRequires:  pixman-devel
 BuildRequires:  pkgconfig(libdisplay-info)
 BuildRequires:  pkgconfig(x11)
 BuildRequires:  pkgconfig(xdamage)
@@ -71,6 +67,13 @@ Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
 Requires:       xorg-x11-server-Xwayland
 Recommends:     mesa-dri-drivers
 Recommends:     mesa-vulkan-drivers
+
+# copr added deps
+BuildRequires:  git
+BuildRequires:  libeis-devel
+BuildRequires:  libdecor-devel
+BuildRequires:  pkgconfig(pixman-1)
+BuildRequires:  pkgconfig(libudev)
 
 %description
 %{name} is the micro-compositor optimized for running video games on Wayland.
