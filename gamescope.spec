@@ -15,8 +15,6 @@ Summary:        Micro-compositor for video games on Wayland
 License:        BSD
 URL:            https://github.com/ValveSoftware/gamescope
 
-Patch01:        0001-cstdint.patch
-
 BuildRequires:  meson >= 0.54.0
 BuildRequires:  ninja-build
 BuildRequires:  cmake
