@@ -22,6 +22,7 @@ BuildRequires:  gcc
 BuildRequires:  gcc-c++
 BuildRequires:  glm-devel
 BuildRequires:  google-benchmark-devel
+BuildRequires:  git
 BuildRequires:  libeis-devel
 BuildRequires:  libdecor-devel
 BuildRequires:  libXmu-devel
@@ -60,8 +61,6 @@ BuildRequires:  stb_image_resize-static
 BuildRequires:  stb_image_write-devel
 BuildRequires:  stb_image_write-static
 BuildRequires:  /usr/bin/glslangValidator
-
-# Deps not present in fedora gamescope currently
 
 # libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
 Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
