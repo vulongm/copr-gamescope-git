@@ -125,6 +125,7 @@ cd gamescope
 %caps(cap_sys_nice=eip) %{_bindir}/gamescope
 %{_bindir}/gamescopestream
 %{_bindir}/gamescopectl
+%{_bindir}/gamescopereaper
 %{_libdir}/libVkLayer_FROG_gamescope_wsi_*.so
 %{_datadir}/vulkan/implicit_layer.d/VkLayer_FROG_gamescope_wsi.*.json
 
