@@ -5,7 +5,6 @@
 %global git_date 20240804
 %global tag 3.14.26
 %global ver_count 1
-%global libliftoff_minver 0.4.1
 
 Name:           gamescope
 Version:        %{tag}
@@ -62,8 +61,6 @@ BuildRequires:  stb_image_write-devel
 BuildRequires:  stb_image_write-static
 BuildRequires:  /usr/bin/glslangValidator
 
-# libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
-Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
 Requires:       xorg-x11-server-Xwayland
 Recommends:     mesa-dri-drivers
 Recommends:     mesa-vulkan-drivers
@@ -74,6 +71,7 @@ BuildRequires:  libeis-devel
 BuildRequires:  libdecor-devel
 
 # submodule deps
+BuildRequires:  pkgconfig(lcms2)
 BuildRequires:  pkgconfig(libinput) >= 1.21.0
 BuildRequires:  pkgconfig(libseat)
 BuildRequires:  pkgconfig(libudev)
