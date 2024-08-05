@@ -103,16 +103,10 @@ sed -i 's^../thirdparty/SPIRV-Headers/include/spirv/^/usr/include/spirv/^' src/m
 
 %autopatch -p1
 
-%if 0%{?fedora} == 39
-  %define avif_screenshots disabled
-%else
-  %define avif_screenshots enabled
-%endif
-
 %build
 cd gamescope
 export PKG_CONFIG_PATH=pkgconfig
-%meson -Dpipewire=enabled -Davif_screenshots=%{avif_screenshots}
+%meson -Dpipewire=enabled
 %meson_build
 
 %install
