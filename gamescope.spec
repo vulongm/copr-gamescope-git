@@ -1,10 +1,10 @@
 # Based on https://src.fedoraproject.org/rpms/gamescope
 
-%global commit 141782b22bea23b52caae514b6dedadee4631c11
+%global commit d4ca0b979732ad6433fe4d0c4a29af7647777ae7
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global git_date 20240829
 %global tag 3.15.3
-%global ver_count 2
+%global ver_count 3
 
 Name:           gamescope
 Version:        %{tag}
