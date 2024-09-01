@@ -1,17 +1,14 @@
 name: Update Gamescope
-
 on:
   workflow_dispatch:
   schedule:
     - cron: "0 * * * *"
-
 jobs:
   update-gamescope:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-
       - name: Get Latest Commit
         id: get-commit
         run: |
@@ -21,7 +18,6 @@ jobs:
           echo "latest-commit=$latest_commit" >> $GITHUB_OUTPUT
           echo "latest-git-date=$latest_git_date" >> $GITHUB_OUTPUT
           echo "latest-tag=$latest_tag" >> $GITHUB_OUTPUT
-
       - name: Get Current Commit
         id: get-current-commit
         run: |
@@ -31,7 +27,6 @@ jobs:
           echo "current-commit=$current_commit" >> $GITHUB_OUTPUT
           echo "current-git-date=$current_git_date" >> $GITHUB_OUTPUT
           echo "current-ver-count=$current_ver_count" >> $GITHUB_OUTPUT
-
       - name: Compare Commits
         id: compare-commits
         run: |
@@ -46,7 +41,6 @@ jobs:
           else
             echo "new-commit='false'" >> $GITHUB_OUTPUT
           fi
-
       - name: Update Spec File
         if: ${{ contains(steps.compare-commits.outputs.new-commit, 'true') }}
         run: |
@@ -54,7 +48,6 @@ jobs:
           sed -i "s/%global git_date .*/%global git_date ${{ steps.get-commit.outputs.latest-git-date }}/g" gamescope.spec
           sed -i "s/%global tag .*/%global tag ${{ steps.get-commit.outputs.latest-tag }}/g" gamescope.spec
           sed -i "s/%global ver_count .*/%global ver_count ${{ steps.compare-commits.outputs.ver-count }}/g" gamescope.spec
-
       - name: Commit and Push Changes
         if: ${{ contains(steps.compare-commits.outputs.new-commit, 'true') }}
         run: |

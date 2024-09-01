@@ -6,14 +6,20 @@
 %global tag 3.15.3
 %global ver_count 3
 
+%if 0%{?fedora} >= 41
+%global libliftoff_minver 0.5.0
+%else
+%global libliftoff_minver 0.4.1
+%endif
+
 Name:           gamescope
 Version:        %{tag}
 Release:        %{git_date}.%{ver_count}.%{shortcommit}%{?dist}
 Summary:        Micro-compositor for video games on Wayland
 
-License:        BSD
+# Automatically converted from old format: BSD - review is highly recommended.
+License:        LicenseRef-Callaway-BSD
 URL:            https://github.com/ValveSoftware/gamescope
-
 # Create stb.pc to satisfy dependency('stb')
 Source0:        stb.pc
 
@@ -45,7 +51,11 @@ BuildRequires:  pkgconfig(xkbcommon)
 BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(libpipewire-0.3)
 BuildRequires:  pkgconfig(libavif)
+BuildRequires:  pkgconfig(wlroots-0.18)
+BuildRequires:  (pkgconfig(libliftoff) >= %{libliftoff_minver} with pkgconfig(libliftoff) < 0.6)
 BuildRequires:  pkgconfig(libcap)
+BuildRequires:  pkgconfig(libeis-1.0)
+BuildRequires:  pkgconfig(libdecor-0)
 BuildRequires:  pkgconfig(hwdata)
 BuildRequires:  spirv-headers-devel
 # Enforce the the minimum EVR to contain fixes for all of:
@@ -59,18 +69,17 @@ BuildRequires:  stb_image_resize-devel
 BuildRequires:  stb_image_resize-static
 BuildRequires:  stb_image_write-devel
 BuildRequires:  stb_image_write-static
+# BuildRequires:  vkroots-devel
 BuildRequires:  /usr/bin/glslangValidator
 
+# libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
+Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
 Requires:       xorg-x11-server-Xwayland
 Recommends:     mesa-dri-drivers
 Recommends:     mesa-vulkan-drivers
 
-# gamescope copr added deps
+# submodule/copr deps
 BuildRequires:  git
-BuildRequires:  libeis-devel
-BuildRequires:  libdecor-devel
-
-# submodule deps
 BuildRequires:  pkgconfig(lcms2)
 BuildRequires:  pkgconfig(libinput) >= 1.21.0
 BuildRequires:  pkgconfig(libseat)
@@ -114,10 +123,10 @@ cd gamescope
 %files
 %license gamescope/LICENSE
 %doc gamescope/README.md
-%caps(cap_sys_nice=eip) %{_bindir}/gamescope
-%{_bindir}/gamescopestream
+%{_bindir}/gamescope
 %{_bindir}/gamescopectl
 %{_bindir}/gamescopereaper
+%{_bindir}/gamescopestream
 %{_libdir}/libVkLayer_FROG_gamescope_wsi_*.so
 %{_datadir}/vulkan/implicit_layer.d/VkLayer_FROG_gamescope_wsi.*.json
 
