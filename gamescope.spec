@@ -79,6 +79,7 @@ Recommends:     mesa-dri-drivers
 Recommends:     mesa-vulkan-drivers
 
 # submodule/copr deps
+BuildRequires:  pkgconfig(luajit)
 BuildRequires:  git
 BuildRequires:  pkgconfig(lcms2)
 BuildRequires:  pkgconfig(libinput) >= 1.21.0
