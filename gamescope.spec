@@ -130,6 +130,7 @@ cd gamescope
 %{_bindir}/gamescopestream
 %{_libdir}/libVkLayer_FROG_gamescope_wsi_*.so
 %{_datadir}/vulkan/implicit_layer.d/VkLayer_FROG_gamescope_wsi.*.json
+%{_datadir}/gamescope/scripts
 
 %changelog
 %autochangelog
