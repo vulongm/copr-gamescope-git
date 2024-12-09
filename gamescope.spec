@@ -1,10 +1,10 @@
 # Based on https://src.fedoraproject.org/rpms/gamescope
 
-%global commit d3174928d47f7e353e7daca63cf882d65660cc7c
+%global commit 6330a32c8e5523b2f7392f09b1cdc73a060762a5
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global git_date 20241124
-%global tag 3.15.14
-%global ver_count 2
+%global git_date 20241209
+%global tag 3.15.15
+%global ver_count 1
 
 %if 0%{?fedora} >= 41
 %global libliftoff_minver 0.5.0
