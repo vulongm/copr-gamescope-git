@@ -4,7 +4,7 @@
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global git_date 20241216
 %global tag 3.16.1
-%global ver_count 3
+%global ver_count 4
 
 %if 0%{?fedora} >= 41
 %global libliftoff_minver 0.5.0
