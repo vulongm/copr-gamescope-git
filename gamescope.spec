@@ -22,6 +22,7 @@ License:        LicenseRef-Callaway-BSD
 URL:            https://github.com/ValveSoftware/gamescope
 # Create stb.pc to satisfy dependency('stb')
 Source0:        stb.pc
+Patch0:         1671.patch
 
 BuildRequires:  meson >= 0.54.0
 BuildRequires:  ninja-build
