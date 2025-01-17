@@ -1,9 +1,9 @@
 # Based on https://src.fedoraproject.org/rpms/gamescope
 
-%global commit 1248f3ae87a04f6c1c1808e7dcbf8abb268eeed4
+%global commit 3d230c945945b4981f73e513d3d957f149706dc9
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global git_date 20250115
-%global tag 3.16.1
+%global git_date 20250117
+%global tag dmemcg-experimental
 %global ver_count 1
 
 %if 0%{?fedora} >= 41
