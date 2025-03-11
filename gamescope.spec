@@ -93,7 +93,7 @@ BuildRequires:  pkgconfig(xcb-errors)
 BuildRequires:  pkgconfig(xcb-icccm)
 BuildRequires:  pkgconfig(xcb-renderutil)
 BuildRequires:  pkgconfig(xwayland)
-
+BuildRequires:  pkgconfig(openvr)
 %description
 %{name} is the micro-compositor optimized for running video games on Wayland.
 
@@ -115,7 +115,7 @@ sed -i 's^../thirdparty/SPIRV-Headers/include/spirv/^/usr/include/spirv/^' src/m
 %build
 cd gamescope
 export PKG_CONFIG_PATH=pkgconfig
-%meson -Dpipewire=enabled -DCMAKE_ARGS="DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+%meson -Dpipewire=enabled
 %meson_build
 
 %install
