@@ -115,7 +115,7 @@ sed -i 's^../thirdparty/SPIRV-Headers/include/spirv/^/usr/include/spirv/^' src/m
 %build
 cd gamescope
 export PKG_CONFIG_PATH=pkgconfig
-%meson -Dpipewire=enabled -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+%meson -Dpipewire=enabled -DCMAKE_ARGS="DCMAKE_POLICY_VERSION_MINIMUM=3.5"
 %meson_build
 
 %install
