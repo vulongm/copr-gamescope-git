@@ -1,8 +1,8 @@
 # Based on https://src.fedoraproject.org/rpms/gamescope
 
-%global commit 1ab8009d5dc5faaff5d890ef896483ef14363536
+%global commit 944a29a329e0c610b6448b29992925a672be54be
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global git_date 20250415
+%global git_date 20250425
 %global tag 3.16.1
 %global ver_count 1
 
