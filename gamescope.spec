@@ -110,8 +110,6 @@ cp %{SOURCE0} pkgconfig/stb.pc
 # Replace spirv-headers include with the system directory
 sed -i 's^../thirdparty/SPIRV-Headers/include/spirv/^/usr/include/spirv/^' src/meson.build
 
-#%autopatch -p1
-
 %build
 cd gamescope
 export PKG_CONFIG_PATH=pkgconfig
