@@ -1,10 +1,10 @@
 # Based on https://src.fedoraproject.org/rpms/gamescope
 
-%global commit cb3fdea3e4c000f4a1d618b3826d44fd0cbeaafe
+%global commit 1
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global git_date 20250425
-%global tag dmemcg-experimental
-%global ver_count 3
+%global git_date 2025
+%global tag 1
+%global ver_count 1
 
 %if 0%{?fedora} >= 41
 %global libliftoff_minver 0.5.0
@@ -22,42 +22,45 @@ License:        LicenseRef-Callaway-BSD
 URL:            https://github.com/ValveSoftware/gamescope
 # Create stb.pc to satisfy dependency('stb')
 Source0:        stb.pc
-Patch0:         1671.patch
 
-BuildRequires:  meson >= 0.54.0
-BuildRequires:  ninja-build
 BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
+BuildRequires:  git-core
 BuildRequires:  glm-devel
 BuildRequires:  google-benchmark-devel
-BuildRequires:  libXmu-devel
 BuildRequires:  libXcursor-devel
+BuildRequires:  libXmu-devel
+BuildRequires:  meson >= 0.54.0
+BuildRequires:  ninja-build
+BuildRequires:  pkgconfig(hwdata)
+BuildRequires:  pkgconfig(libavif)
+BuildRequires:  pkgconfig(libcap)
+BuildRequires:  pkgconfig(libdecor-0)
 BuildRequires:  pkgconfig(libdisplay-info)
-BuildRequires:  pkgconfig(x11)
-BuildRequires:  pkgconfig(xdamage)
-BuildRequires:  pkgconfig(xcomposite)
-BuildRequires:  pkgconfig(xrender)
-BuildRequires:  pkgconfig(xext)
-BuildRequires:  pkgconfig(xfixes)
-BuildRequires:  pkgconfig(xxf86vm)
-BuildRequires:  pkgconfig(xtst)
-BuildRequires:  pkgconfig(xres)
 BuildRequires:  pkgconfig(libdrm)
+BuildRequires:  pkgconfig(libeis-1.0)
+BuildRequires:  (pkgconfig(libliftoff) >= %{libliftoff_minver} with pkgconfig(libliftoff) < 0.6)
+BuildRequires:  pkgconfig(libpipewire-0.3)
+BuildRequires:  pkgconfig(libudev)
+BuildRequires:  pkgconfig(luajit)
+BuildRequires:  pkgconfig(openvr) >= 2.7
+BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(vulkan)
+BuildRequires:  pkgconfig(wayland-protocols) >= 1.17
 BuildRequires:  pkgconfig(wayland-scanner)
 BuildRequires:  pkgconfig(wayland-server)
-BuildRequires:  pkgconfig(wayland-protocols) >= 1.17
-BuildRequires:  pkgconfig(xkbcommon)
-BuildRequires:  pkgconfig(sdl2)
-BuildRequires:  pkgconfig(libpipewire-0.3)
-BuildRequires:  pkgconfig(libavif)
 BuildRequires:  pkgconfig(wlroots-0.18)
-BuildRequires:  (pkgconfig(libliftoff) >= %{libliftoff_minver} with pkgconfig(libliftoff) < 0.6)
-BuildRequires:  pkgconfig(libcap)
-BuildRequires:  pkgconfig(libeis-1.0)
-BuildRequires:  pkgconfig(libdecor-0)
-BuildRequires:  pkgconfig(hwdata)
+BuildRequires:  pkgconfig(x11)
+BuildRequires:  pkgconfig(xcomposite)
+BuildRequires:  pkgconfig(xdamage)
+BuildRequires:  pkgconfig(xext)
+BuildRequires:  pkgconfig(xfixes)
+BuildRequires:  pkgconfig(xkbcommon)
+BuildRequires:  pkgconfig(xrender)
+BuildRequires:  pkgconfig(xres)
+BuildRequires:  pkgconfig(xtst)
+BuildRequires:  pkgconfig(xxf86vm)
 BuildRequires:  spirv-headers-devel
 # Enforce the the minimum EVR to contain fixes for all of:
 # CVE-2021-28021 CVE-2021-42715 CVE-2021-42716 CVE-2022-28041 CVE-2023-43898
@@ -70,30 +73,28 @@ BuildRequires:  stb_image_resize-devel
 BuildRequires:  stb_image_resize-static
 BuildRequires:  stb_image_write-devel
 BuildRequires:  stb_image_write-static
-# BuildRequires:  vkroots-devel
+#BuildRequires:  vkroots-devel
 BuildRequires:  /usr/bin/glslangValidator
-
+ 
 # libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
 Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
 Requires:       xorg-x11-server-Xwayland
 Recommends:     mesa-dri-drivers
 Recommends:     mesa-vulkan-drivers
 
-# submodule/copr deps
-BuildRequires:  pkgconfig(luajit)
-BuildRequires:  git
+# submodule deps
+#BuildRequires:  git
 BuildRequires:  pkgconfig(lcms2)
 BuildRequires:  pkgconfig(libinput) >= 1.21.0
 BuildRequires:  pkgconfig(libseat)
-BuildRequires:  pkgconfig(libudev)
-BuildRequires:  pkgconfig(pixman-1) >= 0.42.0
+#BuildRequires:  pkgconfig(pixman-1) >= 0.42.0
 BuildRequires:  pkgconfig(x11-xcb)
 BuildRequires:  pkgconfig(xcb)
 BuildRequires:  pkgconfig(xcb-errors)
 BuildRequires:  pkgconfig(xcb-icccm)
 BuildRequires:  pkgconfig(xcb-renderutil)
 BuildRequires:  pkgconfig(xwayland)
-BuildRequires:  pkgconfig(openvr)
+
 %description
 %{name} is the micro-compositor optimized for running video games on Wayland.
 
@@ -115,13 +116,24 @@ sed -i 's^../thirdparty/SPIRV-Headers/include/spirv/^/usr/include/spirv/^' src/m
 %build
 cd gamescope
 export PKG_CONFIG_PATH=pkgconfig
-%meson -Dpipewire=enabled
+%meson \
+    -Davif_screenshots=enabled \
+    -Dbenchmark=enabled \
+    -Ddrm_backend=enabled \
+    -Denable_gamescope=true \
+    -Denable_gamescope_wsi_layer=true \
+    -Denable_openvr_support=true \
+    -Dforce_fallback_for=[] \
+    -Dinput_emulation=enabled \
+    -Dpipewire=enabled \
+    -Drt_cap=enabled \
+    -Dsdl2_backend=enabled
 %meson_build
 
 %install
 cd gamescope
 %meson_install --skip-subprojects
-
+	
 %files
 %license gamescope/LICENSE
 %doc gamescope/README.md
@@ -129,9 +141,9 @@ cd gamescope
 %{_bindir}/gamescopectl
 %{_bindir}/gamescopereaper
 %{_bindir}/gamescopestream
+%{_datadir}/gamescope
 %{_libdir}/libVkLayer_FROG_gamescope_wsi_*.so
 %{_datadir}/vulkan/implicit_layer.d/VkLayer_FROG_gamescope_wsi.*.json
-%{_datadir}/gamescope/scripts
 
 %changelog
 %autochangelog

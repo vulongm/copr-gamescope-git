@@ -2,7 +2,7 @@ name: Update Gamescope
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */4 * * *"
+    - cron: "0 * * * *"
 jobs:
   update-gamescope:
     runs-on: ubuntu-latest
@@ -14,7 +14,7 @@ jobs:
         run: |
           latest_commit=$(curl -s https://api.github.com/repos/ValveSoftware/gamescope/commits/master | jq -r '.sha')
           latest_git_date=$(curl -s https://api.github.com/repos/ValveSoftware/gamescope/commits/master | jq -r '.commit.committer.date' | cut -d "T" -f1 | sed 's/-//g')
-          latest_tag=$(curl -s https://api.github.com/repos/ValveSoftware/gamescope/tags | jq -r '.[0].name')
+          latest_tag=$(curl -s https://api.github.com/repos/ValveSoftware/gamescope/tags | jq -r '.[].name' | grep -v '-' | sort -V | tail -n1)
           echo "latest-commit=$latest_commit" >> $GITHUB_OUTPUT
           echo "latest-git-date=$latest_git_date" >> $GITHUB_OUTPUT
           echo "latest-tag=$latest_tag" >> $GITHUB_OUTPUT
