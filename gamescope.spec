@@ -86,7 +86,7 @@ Recommends:     mesa-vulkan-drivers
 BuildRequires:  pkgconfig(lcms2)
 BuildRequires:  pkgconfig(libinput) >= 1.21.0
 BuildRequires:  pkgconfig(libseat)
-#BuildRequires:  pkgconfig(pixman-1) >= 0.42.0
+BuildRequires:  pkgconfig(pixman-1) >= 0.42.0
 BuildRequires:  pkgconfig(x11-xcb)
 BuildRequires:  pkgconfig(xcb)
 BuildRequires:  pkgconfig(xcb-errors)
