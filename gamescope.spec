@@ -119,6 +119,7 @@ export PKG_CONFIG_PATH=pkgconfig
     -Denable_gamescope=true \
     -Denable_gamescope_wsi_layer=true \
     -Denable_openvr_support=true \
+    -Dforce_fallback_for=wlroots,libliftoff,vkroots \
     -Dinput_emulation=enabled \
     -Dpipewire=enabled \
     -Drt_cap=enabled \
