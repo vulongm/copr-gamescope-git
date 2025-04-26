@@ -83,7 +83,6 @@ Recommends:     mesa-dri-drivers
 Recommends:     mesa-vulkan-drivers
 
 # submodule deps
-#BuildRequires:  git
 BuildRequires:  pkgconfig(lcms2)
 BuildRequires:  pkgconfig(libinput) >= 1.21.0
 BuildRequires:  pkgconfig(libseat)
@@ -123,7 +122,7 @@ export PKG_CONFIG_PATH=pkgconfig
     -Denable_gamescope=true \
     -Denable_gamescope_wsi_layer=true \
     -Denable_openvr_support=true \
-    -Dforce_fallback_for=[] \
+    #-Dforce_fallback_for=[] \
     -Dinput_emulation=enabled \
     -Dpipewire=enabled \
     -Drt_cap=enabled \
