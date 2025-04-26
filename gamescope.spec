@@ -1,8 +1,8 @@
 # Based on https://src.fedoraproject.org/rpms/gamescope
 
-%global commit cb3fdea3e4c000f4a1d618b3826d44fd0cbeaafe
+%global commit 1ab8009d5dc5faaff5d890ef896483ef14363536
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global git_date 20250425
+%global git_date 20250415
 %global tag 3.16.4
 %global ver_count 1
 
@@ -86,7 +86,7 @@ Recommends:     mesa-vulkan-drivers
 BuildRequires:  pkgconfig(lcms2)
 BuildRequires:  pkgconfig(libinput) >= 1.21.0
 BuildRequires:  pkgconfig(libseat)
-BuildRequires:  pkgconfig(pixman-1) >= 0.42.0
+#BuildRequires:  pkgconfig(pixman-1) >= 0.42.0
 BuildRequires:  pkgconfig(x11-xcb)
 BuildRequires:  pkgconfig(xcb)
 BuildRequires:  pkgconfig(xcb-errors)
