@@ -1,8 +1,8 @@
 # Based on https://src.fedoraproject.org/rpms/gamescope
 
-%global commit cb3fdea3e4c000f4a1d618b3826d44fd0cbeaafe
+%global commit 1ab8009d5dc5faaff5d890ef896483ef14363536
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global git_date 20250425
+%global git_date 20250415
 %global tag 3.16.4
 %global ver_count 1
 
@@ -120,7 +120,7 @@ export PKG_CONFIG_PATH=pkgconfig
     -Denable_gamescope_wsi_layer=true \
     -Denable_openvr_support=true \
     #-Dforce_fallback_for=[] \
-    -Dinput_emulation=enabled \
+    #-Dinput_emulation=enabled \
     -Dpipewire=enabled \
     -Drt_cap=enabled \
     -Dsdl2_backend=enabled
