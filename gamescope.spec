@@ -113,18 +113,7 @@ sed -i 's^../thirdparty/SPIRV-Headers/include/spirv/^/usr/include/spirv/^' src/m
 %build
 cd gamescope
 export PKG_CONFIG_PATH=pkgconfig
-%meson \
-    -Davif_screenshots=enabled \
-    -Dbenchmark=enabled \
-    -Ddrm_backend=enabled \
-    -Denable_gamescope=true \
-    -Denable_gamescope_wsi_layer=true \
-    -Denable_openvr_support=true \
-    #-Dforce_fallback_for=[] \
-    #-Dinput_emulation=enabled \
-    -Dpipewire=enabled \
-    -Drt_cap=enabled \
-    -Dsdl2_backend=enabled
+%meson -Dpipewire=enabled
 %meson_build
 
 %install
