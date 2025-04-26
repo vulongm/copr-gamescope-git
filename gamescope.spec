@@ -73,7 +73,7 @@ BuildRequires:  stb_image_resize-devel
 BuildRequires:  stb_image_resize-static
 BuildRequires:  stb_image_write-devel
 BuildRequires:  stb_image_write-static
-#BuildRequires:  vkroots-devel
+BuildRequires:  vkroots-devel
 BuildRequires:  /usr/bin/glslangValidator
  
 # libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
@@ -119,7 +119,6 @@ export PKG_CONFIG_PATH=pkgconfig
     -Denable_gamescope=true \
     -Denable_gamescope_wsi_layer=true \
     -Denable_openvr_support=true \
-    -Dforce_fallback_for=wlroots,libliftoff,vkroots \
     -Dinput_emulation=enabled \
     -Dpipewire=enabled \
     -Drt_cap=enabled \
