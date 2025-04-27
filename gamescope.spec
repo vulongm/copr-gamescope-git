@@ -16,12 +16,18 @@ Name:           gamescope
 Version:        %{tag}
 Release:        %{git_date}.%{ver_count}.%{shortcommit}%{?dist}
 Summary:        Micro-compositor for video games on Wayland
-
 # Automatically converted from old format: BSD - review is highly recommended.
 License:        LicenseRef-Callaway-BSD
 URL:            https://github.com/ValveSoftware/gamescope
+# luajit is not available on ppc64le:
+# https://bugzilla.redhat.com/show_bug.cgi?id=2339416
+ExcludeArch:    ppc64le
+
 # Create stb.pc to satisfy dependency('stb')
 Source0:        stb.pc
+
+# Revert https://github.com/ValveSoftware/gamescope/pull/1751:
+Patch:          revert-1751.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc
@@ -73,9 +79,9 @@ BuildRequires:  stb_image_resize-devel
 BuildRequires:  stb_image_resize-static
 BuildRequires:  stb_image_write-devel
 BuildRequires:  stb_image_write-static
-BuildRequires:  vkroots-devel
+#BuildRequires:  vkroots-devel
 BuildRequires:  /usr/bin/glslangValidator
- 
+
 # libliftoff hasn't bumped soname, but API/ABI has changed for 0.2.0 release
 Requires:       libliftoff%{?_isa} >= %{libliftoff_minver}
 Requires:       xorg-x11-server-Xwayland
@@ -103,11 +109,13 @@ git checkout %{commit}
 git submodule update --init --recursive
 
 # Install stub pkgconfig file
-mkdir -p pkgconfig	
+mkdir -p pkgconfig
 cp %{SOURCE0} pkgconfig/stb.pc
 
 # Replace spirv-headers include with the system directory
 sed -i 's^../thirdparty/SPIRV-Headers/include/spirv/^/usr/include/spirv/^' src/meson.build
+
+%autopatch -p1
 
 %build
 cd gamescope
@@ -119,7 +127,7 @@ export PKG_CONFIG_PATH=pkgconfig
     -Denable_gamescope=true \
     -Denable_gamescope_wsi_layer=true \
     -Denable_openvr_support=true \
-    -Dforce_fallback_for=wlroots,libliftoff \
+    -Dforce_fallback_for=wlroots,libliftoff,vkroots \
     -Dinput_emulation=enabled \
     -Dpipewire=enabled \
     -Drt_cap=enabled \
@@ -129,7 +137,7 @@ export PKG_CONFIG_PATH=pkgconfig
 %install
 cd gamescope
 %meson_install --skip-subprojects
-	
+
 %files
 %license gamescope/LICENSE
 %doc gamescope/README.md
