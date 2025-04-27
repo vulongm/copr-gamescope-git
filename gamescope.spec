@@ -100,7 +100,7 @@ BuildRequires:  pkgconfig(xwayland)
 git clone %{URL}
 cd gamescope
 git checkout %{commit}
-git -c submodule."subprojects/vkroots".update=none submodule update --init --recursive
+git submodule update --init --recursive
 
 # Install stub pkgconfig file
 mkdir -p pkgconfig	
@@ -119,7 +119,7 @@ export PKG_CONFIG_PATH=pkgconfig
     -Denable_gamescope=true \
     -Denable_gamescope_wsi_layer=true \
     -Denable_openvr_support=true \
-    -Dforce_fallback_for=wlroots,libliftoff,vkroots \
+    -Dforce_fallback_for=wlroots,libliftoff \
     -Dinput_emulation=enabled \
     -Dpipewire=enabled \
     -Drt_cap=enabled \
