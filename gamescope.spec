@@ -26,9 +26,10 @@ ExcludeArch:    ppc64le
 # Create stb.pc to satisfy dependency('stb')
 Source0:        stb.pc
 
-# Revert https://github.com/ValveSoftware/gamescope/pull/1751:
-#Patch:          revert-1751.patch
-
+# Revert https://github.com/ValveSoftware/gamescope/pull/1751
+# and https://github.com/ValveSoftware/gamescope/pull/1844:
+Patch0:         revert-1751-1844.patch
+ 
 BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
