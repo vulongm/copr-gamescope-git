@@ -27,7 +27,7 @@ ExcludeArch:    ppc64le
 Source0:        stb.pc
 
 # Revert https://github.com/ValveSoftware/gamescope/pull/1751:
-Patch:          revert-1751.patch
+#Patch:          revert-1751.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc
