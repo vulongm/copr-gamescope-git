@@ -6,11 +6,7 @@
 %global tag 3.16.11
 %global ver_count 1
 
-%if 0%{?fedora} >= 41
-%global libliftoff_minver 0.5.0
-%else
-%global libliftoff_minver 0.4.1
-%endif
+%global libliftoff_minver 0.5.0            
 
 Name:           gamescope
 Version:        %{tag}
@@ -26,10 +22,8 @@ ExcludeArch:    ppc64le
 # Create stb.pc to satisfy dependency('stb')
 Source0:        stb.pc
 
-# Revert https://github.com/ValveSoftware/gamescope/pull/1751
-# and https://github.com/ValveSoftware/gamescope/pull/1844:
-Patch0:         revert-1751-1844.patch
- 
+Patch:          Use-system-stb-glm.patch            
+
 BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
