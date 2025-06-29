@@ -30,7 +30,7 @@ jobs:
       - name: Compare Commits
         id: compare-commits
         run: |
-          if [ "${{ steps.get-commit.outputs.latest-commit }}" != "${{ steps.get-current-commit.outputs.current-commit }}" ]; then
+          if [ -n "${{ steps.get-commit.outputs.latest-commit }}" ] && [ "${{ steps.get-commit.outputs.latest-commit }}" != "${{ steps.get-current-commit.outputs.current-commit }}" ]; then
             echo "new-commit='true'" >> $GITHUB_OUTPUT
             if [ "${{ steps.get-commit.outputs.latest-git-date }}" == "${{ steps.get-current-commit.outputs.current-git-date }}" ]; then
               new_ver_count=$((${{ steps.get-current-commit.outputs.current-ver-count }} + 1))
