@@ -98,9 +98,10 @@ BuildRequires:  pkgconfig(xwayland)
 %{name} is the micro-compositor optimized for running video games on Wayland.
 
 %prep
-git clone --revision=%{commit} --depth=1 %{URL}
+git clone %{URL}
 cd gamescope
-git submodule update --init --recursive --depth=1
+git checkout %{commit}
+git submodule update --init --recursive
 
 # Install stub pkgconfig file
 mkdir -p pkgconfig
