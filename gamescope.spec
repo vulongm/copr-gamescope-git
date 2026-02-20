@@ -140,6 +140,7 @@ cd gamescope
 %{_bindir}/gamescopectl
 %{_bindir}/gamescopereaper
 %{_bindir}/gamescopestream
+%{_bindir}/gamescope-type
 %{_datadir}/gamescope
 %{_libdir}/libVkLayer_FROG_gamescope_wsi_*.so
 %{_datadir}/vulkan/implicit_layer.d/VkLayer_FROG_gamescope_wsi.*.json
