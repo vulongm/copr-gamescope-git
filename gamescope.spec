@@ -45,7 +45,7 @@ BuildRequires:  (pkgconfig(libliftoff) >= %{libliftoff_minver} with pkgconfig(li
 BuildRequires:  pkgconfig(libpipewire-0.3)
 BuildRequires:  pkgconfig(libudev)
 BuildRequires:  pkgconfig(luajit)
-BuildRequires:  pkgconfig(openvr) >= 2.7
+#BuildRequires:  pkgconfig(openvr) >= 2.7
 BuildRequires:  pkgconfig(sdl2)
 BuildRequires:  pkgconfig(vulkan)
 BuildRequires:  pkgconfig(wayland-protocols) >= 1.17
