@@ -1,0 +1,15 @@
+diff --git a/subprojects/wlroots/xwayland/sockets.c b/subprojects/wlroots/xwayland/sockets.c
+index 9e287f36..7ba167b6 100644
+--- a/subprojects/wlroots/xwayland/sockets.c
++++ b/subprojects/wlroots/xwayland/sockets.c
+@@ -96,10 +96,6 @@ static bool check_socket_dir(void) {
+ 		wlr_log(WLR_ERROR, "%s is not a directory", socket_dir);
+ 		return false;
+ 	}
+-	if (!((buf.st_uid == 0) || (buf.st_uid == getuid()))) {
+-		wlr_log(WLR_ERROR, "%s not owned by root or us", socket_dir);
+-		return false;
+-	}
+ 	if (!(buf.st_mode & S_ISVTX)) {
+ 		/* we can deal with no sticky bit... */
+ 		if ((buf.st_mode & (S_IWGRP | S_IWOTH))) {

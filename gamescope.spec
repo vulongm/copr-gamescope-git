@@ -22,7 +22,16 @@ ExcludeArch:    ppc64le
 # Create stb.pc to satisfy dependency('stb')
 Source0:        stb.pc
 
-Patch:          Use-system-stb-glm.patch            
+Patch:          Use-system-stb-glm.patch
+
+# Fix wlroots build
+# https://github.com/ValveSoftware/gamescope/issues/2110
+# https://gitlab.freedesktop.org/wlroots/wlroots/-/merge_requests/5261
+Patch1: wlroots-LIBINPUT_SWITCH_KEYPAD_SLIDE.patch
+
+# Fix running in toolbox/distrobox
+# https://github.com/ValveSoftware/gamescope/issues/746
+Patch2: wlroots-remove-permission-check.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc
