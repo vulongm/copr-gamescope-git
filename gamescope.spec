@@ -97,6 +97,7 @@ BuildRequires:  pkgconfig(xcb-errors)
 BuildRequires:  pkgconfig(xcb-icccm)
 BuildRequires:  pkgconfig(xcb-renderutil)
 BuildRequires:  pkgconfig(xwayland)
+BuildRequires:  pkgconfig(catch)
 
 %description
 %{name} is the micro-compositor optimized for running video games on Wayland.
